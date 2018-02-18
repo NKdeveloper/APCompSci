@@ -1,0 +1,23 @@
+public class Troll {
+    double personalWealth;
+    static double totalWealth;
+
+    public void collect(double x) {
+        personalWealth = personalWealth + x;
+        totalWealth = totalWealth + x;
+    }
+
+    public double myMoney() {
+        return personalWealth;
+    }
+
+    public static double treasury() {
+        return totalWealth;
+    }
+
+    public static void emptyTreasury() {
+        totalWealth = 0;
+    }
+
+
+}
