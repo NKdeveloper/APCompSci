@@ -1,0 +1,43 @@
+package Day1;
+
+public class Day1 {
+    private int gpu;
+    private int cpu;
+    private int ram;
+    private int ssd;
+    private int psu;
+
+    public void setGpuSpeed (int x) {
+      gpu = x;
+
+    }
+
+    public void getGpuSpeed () {
+        System.out.println(gpu);
+    }
+
+    public void Day1(int x, int y, int a, int b, int c) {
+        gpu = x;
+        cpu = y;
+        ram = a;
+        ssd = b;
+        psu = c;
+    }
+
+}
+
+package Day1;
+
+import Day1.Day1;
+
+public class Day1Tester  {
+    public static void main(String args []) {
+        Day1 computer = new Day1();
+
+        computer.Day1(1000,2000,3000,4000,500);
+
+        computer.setGpuSpeed(9000);
+
+        computer.getGpuSpeed();
+    }
+}
