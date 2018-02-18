@@ -1,0 +1,21 @@
+public class Car2 extends Car {
+    String brand;
+
+    @Override
+    public String honk() {
+        return "loud honk";
+    }
+
+    @Override
+    public void crash() {
+        wheels -= 2;
+        legroom *= 0.85;
+        horsepower = horsepower - 50;
+    }
+    
+    public String name(String x) {
+        brand = x;
+        return brand;
+    }
+    
+}
