@@ -1,0 +1,59 @@
+
+import java.awt.Desktop;
+import java.util.Random;
+
+public class MyButton implements PushButton {
+    String value;
+    String value2 = " ";
+    Random randomLetters = new Random();
+    int random2Numbers;
+
+    String buttonColor [] = {"red","blue","green","orange","black", "purple", "violet", "gray", "sky blue", "space gray"};
+    String randomText [] = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+
+
+    public String buttonState() {
+
+        for (int i = 1; i < 10; i++) {
+            int index =  randomLetters.nextInt(22) + 1;
+            value2 += randomText [index];
+
+        }
+       random2Numbers = randomLetters.nextInt(9) + 1;
+        value = buttonColor [random2Numbers];
+        System.out.println("The Falcon is preparing for launch");
+        return "button color is " + value + " also " + "the random letters of the day are " + value2;
+    }
+
+
+    public void push () {
+            try {
+                String url = "https://youtu.be/wbSwFU6tY1c?t=21m54s";
+                java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+    }
+
+}
+
+public interface PushButton {
+
+public void push();
+
+public String buttonState();
+
+}
+
+
+
+public class Tester  {
+    public static void main(String args []) {
+        MyButton hello = new MyButton();
+            System.out.println(hello.buttonState());
+
+            hello.push();
+            System.out.println("Thanks for visiting, it was insanely great!");
+    }
+
+}
