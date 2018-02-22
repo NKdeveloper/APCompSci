@@ -1,0 +1,181 @@
+// @author Nikhil Kanamarla
+// @verison 1.3
+// Matrix class allows the user to create and manipulate matrices through addition, subtraction, multiplication,  scalar multiplication, and transposition
+
+
+public class Matrix {
+
+    //declare variables
+    int rows;
+    int columns;
+    private double [] [] matrixArray;
+
+    //@param two int variables representing the rows and columns of 2D array
+    public Matrix(int x, int y) {
+        rows = x;
+        columns = y;
+        matrixArray = new double [rows] [columns];
+
+    }
+
+    //@param two int variables representing the row index and column index with a double value for that position
+    //@throws MatrixException if index out of bounds
+    public void set(int x, int y, double value) throws MatrixException {
+        if ((x > rows || x < 0)) {
+            throw new MatrixException("index out of bounds");
+        }
+        if ((y > columns || y < 0)) {
+            throw new MatrixException("index out of bounds");
+        }
+        matrixArray [x] [y] = value;
+        }
+
+    //@param two int variables representing the row index and column index
+    //@throws MatrixException if index out of bounds
+    //@return new matrix 2D array
+    public double get(int x, int y) throws MatrixException {
+        if ((x > rows || x < 0)) {
+            throw new MatrixException("index out of bounds");
+        }
+        if ((y > columns || y < 0))  {
+            throw new MatrixException("index out of bounds");
+        }
+        return matrixArray [x] [y];
+    }
+
+    // @param two matrices objects
+    //@throws MatrixException if null matrix or matrices have different dimensions
+    // @return new matrix object after adding the two parameter matrices
+    public static Matrix add(Matrix a, Matrix b) throws MatrixException {
+        //exception handling  
+        if (a == null || b == null) {
+
+                throw new MatrixException("null matrixArray");
+        }
+        if ( a.rows != b.rows || a.columns != b.columns) {
+                throw new MatrixException("matrices have different dimensions");
+
+        }
+        
+        //adding matrices 
+        Matrix newMatrix = new Matrix(a.rows,a.columns);
+
+        for (int x = 0; x < a.rows; x++) {
+            for (int y = 0; y < a.columns; y++) {
+                double z = a.get(x,y) + b.get(x,y);
+                newMatrix.set(x,y,z);
+            }
+        }
+
+        return newMatrix;
+    }
+
+    // @param two matrices objects
+    // @throws MatrixException if null matrix or matrices have different dimensions
+    // @return new matrix object after subtracting the two parameter matrices
+    public static Matrix sub(Matrix a, Matrix b) throws MatrixException {
+
+        //exception handling  
+        if (a == null || b == null) {
+
+            throw new MatrixException("null matrix");
+        }
+        if ( a.rows != b.rows || a.columns != b.columns) {
+            throw new MatrixException("matrices have different dimensions");
+
+        }
+        
+        // subtracting matrices 
+        Matrix newMatrix2 = new Matrix(a.rows, a.columns);
+
+        for (int x = 0; x < b.rows; x++) {
+            for (int y = 0; y < b.columns; y++) {
+                double z = a.get(x,y) - b.get(x,y);
+                newMatrix2.set(x,y,z);
+            }
+        }
+
+        return newMatrix2;
+    }
+
+    // @param two matrices objects
+    //@throws MatrixException if null matrix or matrices can't be multiplied
+    // @return new matrix object after multiplying the two parameter matrices
+    public static Matrix mult(Matrix a, Matrix b) throws MatrixException {
+
+        //exception handling  
+        if (a == null || b == null) {
+                throw new MatrixException("null matrix");
+        }
+
+        if(a.rows != b.columns || a.columns != b.rows) {
+            throw new MatrixException("can't multiply matrices");
+        }
+
+        // multiplication of matrices 
+        Matrix newMatrix = new Matrix(a.rows,b.columns);
+
+        double z = 0;
+
+        for (int i = 0; i < a.rows; i++) {
+            for (int j = 0; j < b.columns; j++) {
+                z =  0;
+                for (int k = 0; k < a.columns; k++) {
+                    z += (a.get(i,k) * b.get(k,j));
+                }
+                newMatrix.set(i,j,z);
+            }
+        }
+
+
+        return newMatrix;
+    }
+
+    // @param one matrix object and one double variable
+    //@throws MatrixException if null matrix
+    // @return new matrix object after scalar multiplication the two parameter matrices
+    public static Matrix mult(Matrix a, double value) throws MatrixException {
+
+        //exception handling  
+        if (a == null) {
+                throw new MatrixException("null matrixArray");
+
+        }
+
+        // scalar multiplication   
+        Matrix newMatrix = new Matrix(a.rows,a.columns);
+        for (int i = 0; i < a.rows; i++) {
+            for (int x = 0; x < a.columns; x++) {
+                double z = a.get(i,x) * value;
+                newMatrix.set(i,x,z);
+            }
+        }
+        return newMatrix;
+    }
+
+
+    // @param one matrix object
+    //@throws MatrixException if null matrix
+    // @return new matrix object after transposing
+    public static Matrix transpose (Matrix a) throws MatrixException {
+
+        //exception handling  
+        if (a == null) {
+                throw new MatrixException("null matrixArray");
+
+        }
+
+        //transposing matrix
+        Matrix newMatrix = new Matrix(a.rows,a.columns);
+        for(int i = 0; i < a.rows; i++) {
+            for (int x = 0; x < a.columns; x++) {
+                double z = a.get(i,x);
+                newMatrix.set(x,i,z);
+            }
+        }
+
+        return newMatrix;
+    }
+}
+
+
